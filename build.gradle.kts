@@ -1,4 +1,3 @@
-
 buildscript {
     // gradle.properties에서 값 불러오기
     val agpVersion = project.findProperty("agpVersion") as String? ?: "8.2.0"

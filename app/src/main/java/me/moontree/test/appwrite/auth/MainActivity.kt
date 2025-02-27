@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         account = Account(client)
 
         // ✅ 로그인 버튼 클릭 시 OAuth 실행
-        binding.btn_login.setOnClickListener  {
+        binding.btnLogin.setOnClickListener  {
             startAppwriteOAuth()
         }
 

@@ -1,31 +1,45 @@
 package me.moontree.test.appwrite.auth
 
-import android.app.Activity
-import android.content.Intent
+import androidx.activity.ComponentActivity
 import io.appwrite.Client
 import io.appwrite.services.Account
+import io.appwrite.exceptions.AppwriteException
+import io.appwrite.models.Session
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class AuthManager(private val activity: Activity) {
-    private val account = Account(App.client)
+class AuthManager(private val client: Client, private val scope: CoroutineScope) {
+    private val account = Account(client)
 
-    // Google OAuth 로그인 시작
-    fun signInWithGoogle() {
-        account.createOAuth2Session(
-            activity,
-            provider = "google",
-            success = { result ->
-                activity.runOnUiThread {
-                    activity.startActivity(Intent(activity, MainActivity::class.java))
+    fun createOAuth2Session(activity: ComponentActivity, provider: OAuthProvider, callback: (String?) -> Unit) {
+        scope.launch {
+            try {
+                account.createOAuth2Session(activity, provider)
+                withContext(Dispatchers.Main) {
+                    callback(null)
                 }
-            },
-            failure = { e ->
-                e.printStackTrace()
+            } catch (e: AppwriteException) {
+                withContext(Dispatchers.Main) {
+                    callback(e.message)
+                }
             }
-        )
+        }
     }
 
-    // 로그아웃
-    fun logout() {
-        account.deleteSession("current")
+    fun deleteSession(sessionId: String, callback: (String?) -> Unit) {
+        scope.launch {
+            try {
+                account.deleteSession(sessionId)
+                withContext(Dispatchers.Main) {
+                    callback(null)
+                }
+            } catch (e: AppwriteException) {
+                withContext(Dispatchers.Main) {
+                    callback(e.message)
+                }
+            }
+        }
     }
 }

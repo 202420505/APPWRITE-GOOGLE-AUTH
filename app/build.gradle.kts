@@ -25,6 +25,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    viewBinding {
+        enabled = true
+    }
 }
 
 java {

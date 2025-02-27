@@ -29,12 +29,12 @@ class MainActivity : AppCompatActivity() {
         // 🔹 Appwrite 클라이언트 초기화
         client = Client(this)
             .setEndpoint("https://cloud.appwrite.io/v1")  // Appwrite 서버 주소
-            .setProject("YOUR_PROJECT_ID")  // Appwrite 프로젝트 ID
+            .setProject("moontree-test")  // Appwrite 프로젝트 ID
 
         account = Account(client)
 
         // ✅ 로그인 버튼 클릭 시 OAuth 실행
-        binding.btnGoogleLogin.setOnClickListener {
+        binding.btn_login.setOnClickListener  {
             startAppwriteOAuth()
         }
 

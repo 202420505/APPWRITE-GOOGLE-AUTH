@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     // ✅ Appwrite OAuth 로그인 시작
     private fun startAppwriteOAuth() {
-        val authUrl = "https://cloud.appwrite.io/v1/account/sessions/oauth2/google?project=YOUR_PROJECT_ID&success=appwrite://auth/oauth&failure=appwrite://auth/oauth"
+        val authUrl = "https://cloud.appwrite.io/v1/account/sessions/oauth2/google?project=moontree-test&success=appwrite://auth/oauth&failure=appwrite://auth/oauth"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(authUrl))
         startActivity(intent)
     }

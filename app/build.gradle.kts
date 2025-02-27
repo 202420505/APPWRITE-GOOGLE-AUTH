@@ -10,7 +10,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "me.moontree.treepos.v1"
+        applicationId = "me.moontree.test.appwrite.auth"
         minSdk = 21
         targetSdk = 34
         versionCode = 1

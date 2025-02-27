@@ -25,8 +25,8 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true  // ✅ 이 방식이 Kotlin DSL에서 더 안정적
     }
 }
 

@@ -1,13 +1,16 @@
+import org.gradle.api.JavaVersion // 올바른 JavaVersion 패키지 import
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
 }
 
 android {
-    compileSdk = 34
+    namespace = "me.moontree.test.appwrite.auth"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "me.moontree.test.appwrite.auth"
+        applicationId = "me.moontree.treepos.v1"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
@@ -17,13 +20,71 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        debug {
+            isMinifyEnabled = false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17 // 올바른 JavaVersion 참조
+        targetCompatibility = JavaVersion.VERSION_17 // 올바른 JavaVersion 참조
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("keystore.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17)) // 올바른 toolchain 설정
     }
 }
 
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("io.appwrite:sdk-for-android:3.0.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+
+     // appwrite.io
+    implementation("io.appwrite:sdk-for-android:7.0.0")
+
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
+    implementation("com.google.android.material:material:1.12.0")
+
+    implementation("androidx.activity:activity-ktx:1.8.0")
+
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
+
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+
+    // WebView 사용
+    implementation("androidx.webkit:webkit:1.9.0")
+
+    // 테스트 라이브러리
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

@@ -1,4 +1,4 @@
-package com.example.appwriteauth
+package me.moontree.test.appwrite.auth
 
 import android.content.Intent
 import android.net.Uri

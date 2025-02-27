@@ -42,8 +42,7 @@ class MainActivity : AppCompatActivity() {
     private fun startAppwriteOAuth() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val session = account.createOAuthToken(
-                    userId = ID.unique(),
+                val session = account.createOAuth2Token(
                     provider = "google"
                 )
                 Log.d("AppwriteOAuth", "OAuth Token Created: ${session.userId}")
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 val user = account.get()
                 Log.d("AppwriteOAuth", "User Info: ${user.name}, ${user.email}")
             } catch (e: Exception) {
-                Log.e("AppwriteOAuth", "Failed to create OAuth token: ${e.message}")
+                Log.e("AppwriteOAuth", "Failed to create OAuth2 token: ${e.message}")
             }
         }
     }

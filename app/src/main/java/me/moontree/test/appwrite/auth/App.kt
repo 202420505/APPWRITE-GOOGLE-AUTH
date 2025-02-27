@@ -14,6 +14,6 @@ class App : Application() {
         // Appwrite 클라이언트 초기화
         client = Client(this)
             .setEndpoint("https://cloud.appwrite.io/v1") // Appwrite 엔드포인트
-            .setProject("YOUR_PROJECT_ID") // 프로젝트 ID 입력
+            .setProject("moontree-test") // 프로젝트 ID 입력
     }
 }

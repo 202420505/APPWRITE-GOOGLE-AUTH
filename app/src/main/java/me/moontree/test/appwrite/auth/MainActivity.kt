@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
                 val session = account.createOAuth2Token(
                     activity = this@MainActivity,  // 🔹 현재 Activity 전달
                     provider = OAuthProvider.GOOGLE, // 🔹 OAuthProvider.Google 사용
+                    success=appwrite://auth/oauth,
+                    failure=appwrite://auth/oauth,
                 )
                 Log.d("AppwriteOAuth", "OAuth Token Created Successfully")
 

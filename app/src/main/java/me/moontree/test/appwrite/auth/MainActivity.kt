@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import io.appwrite.Client
 import io.appwrite.services.Account
-import io.appwrite.oauth.OAuthProvider
+import io.appwrite.enums.OAuthProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

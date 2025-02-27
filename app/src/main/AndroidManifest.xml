@@ -5,7 +5,7 @@
         android:allowBackup="true"
         android:theme="@style/Theme.MyApp">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -13,7 +13,7 @@
         </activity>
 
         <!-- OAuth Callback -->
-        <activity android:name="io.appwrite.oauth.OAuthActivity">
+        <activity android:name="io.appwrite.oauth.OAuthActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

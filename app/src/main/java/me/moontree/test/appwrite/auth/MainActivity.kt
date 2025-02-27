@@ -2,10 +2,8 @@ package me.moontree.test.appwrite.auth
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import io.appwrite.Client
-import io.appwrite.oauth.OAuthProvider
 import io.appwrite.services.Account
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 val session = account.createOAuth2Token(
                     activity = this@MainActivity,  // 🔹 현재 Activity 전달
-                    provider = OAuthProvider.Google  // 🔹 OAuthProvider.Google 사용
+                    provider = "google",  // 🔹 provider로 "google" 문자열 전달
                 )
                 Log.d("AppwriteOAuth", "OAuth Token Created Successfully")
 
@@ -57,3 +55,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+

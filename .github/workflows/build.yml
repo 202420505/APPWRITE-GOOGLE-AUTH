@@ -1,16 +1,14 @@
-name: Android Build
+name: Android Build and Push Gradle Wrapper
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+      - dev
 
 jobs:
   build:
-    name: Build Android App
+    name: Build Android App and Push Gradle Wrapper
     runs-on: ubuntu-latest
 
     steps:
@@ -46,3 +44,14 @@ jobs:
         with:
           name: app-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      # Gradle Wrapper 파일을 Git에 푸시
+      - name: Push Gradle Wrapper to Repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add gradlew gradlew.bat
+          git commit -m "Add Gradle Wrapper"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

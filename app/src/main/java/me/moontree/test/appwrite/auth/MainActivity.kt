@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.appwriteauth.databinding.ActivityMainBinding
+import me.moontree.test.appwrite.auth.databinding.ActivityMainBinding
 import io.appwrite.Client
 import io.appwrite.services.Account
 import kotlinx.coroutines.CoroutineScope

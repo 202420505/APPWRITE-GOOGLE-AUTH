@@ -1,0 +1,15 @@
+plugins {
+    id 'com.android.application' version '7.0.4' apply false
+    id 'com.android.library' version '7.0.4' apply false
+}
+
+subprojects {
+    apply plugin: 'com.android.application'
+    android {
+        compileSdkVersion 30
+        defaultConfig {
+            minSdkVersion 21
+            targetSdkVersion 30
+        }
+    }
+}

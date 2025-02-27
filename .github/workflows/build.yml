@@ -1,4 +1,4 @@
-name: Android Build and Push Gradle Wrapper
+name: Android Build
 
 on:
   push:
@@ -8,50 +8,56 @@ on:
 
 jobs:
   build:
-    name: Build Android App and Push Gradle Wrapper
+    name: Build Android App
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Gradle Wrapper 생성
-      - name: Set up Gradle Wrapper
+      # ✅ Gradle Wrapper 체크 및 자동 푸시
+      - name: Check and Generate Gradle Wrapper if missing
         run: |
-          wget https://services.gradle.org/distributions/gradle-7.5.1-bin.zip -P /tmp
-          unzip -d /tmp /tmp/gradle-7.5.1-bin.zip
-          export PATH=$PATH:/tmp/gradle-7.5.1/bin
-          gradle wrapper --gradle-version 7.5.1
+          if [ ! -f gradlew ]; then
+            echo "Gradle Wrapper not found, generating it..."
+            gradle wrapper
+            chmod +x gradlew
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git add gradlew gradlew.bat gradle/wrapper/
+            git commit -m "Auto-generate Gradle Wrapper"
+            git push origin main
+          else
+            echo "Gradle Wrapper already exists."
+          fi
+          
+      # ✅ Gradle 캐시 최적화
+      - name: Cache Gradle dependencies and wrapper
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
 
-      # JDK 17 설정
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'zulu'
           java-version: '17'
 
-      # Gradle 실행 권한 부여
-      - name: Grant execute permission to Gradle Wrapper
-        run: chmod +x gradlew
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
-      # APK 빌드
-      - name: Build APK
-        run: ./gradlew assembleDebug
+      # ✅ Gradle 실행 최적화
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --no-daemon --parallel --build-cache --configure-on-demand
 
-      # 빌드된 APK 업로드
-      - name: Upload APK Artifact
+      - name: Upload Debug APK as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-apk
+          name: android-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
-
-      # Gradle Wrapper 파일을 Git에 푸시
-      - name: Push Gradle Wrapper to Repository
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add gradlew gradlew.bat
-          git commit -m "Add Gradle Wrapper"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          if-no-files-found: error  # 단일 파일 업로드 유지

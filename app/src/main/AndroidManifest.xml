@@ -13,7 +13,7 @@
 
         <!-- OAuth Callback -->
         <activity android:name="io.appwrite.oauth.OAuthActivity" android:exported="true">
-            <intent-filter>
+            <intent-filter android:label="android_web_auth">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />

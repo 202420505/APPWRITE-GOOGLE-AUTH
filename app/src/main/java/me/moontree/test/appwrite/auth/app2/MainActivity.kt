@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import io.appwrite.Client
 import io.appwrite.services.Account
 import io.appwrite.enums.OAuthProvider
+import io.appwrite.coroutines.CoroutineCallback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "me.moontree.test.appwrite.auth"
+    namespace = "me.moontree.test.appwrite.auth.app2"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "me.moontree.test.appwrite.auth"
+        applicationId = "me.moontree.test.appwrite.auth.app2"
         minSdk = 21
         targetSdk = 34
         versionCode = 1

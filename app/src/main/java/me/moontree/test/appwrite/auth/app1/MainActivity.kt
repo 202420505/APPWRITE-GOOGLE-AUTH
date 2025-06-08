@@ -9,7 +9,7 @@ import io.appwrite.enums.OAuthProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import me.moontree.test.appwrite.auth.databinding.ActivityMainBinding
+import me.moontree.test.appwrite.auth.app1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

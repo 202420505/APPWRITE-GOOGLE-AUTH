@@ -3,8 +3,8 @@ name: Android Build
 on:
   push:
     branches:
-      - main
-      - dev
+      - app1
+      - app2
       
 permissions:
   contents: write

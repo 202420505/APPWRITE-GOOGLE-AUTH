@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         // 🔹 Appwrite 클라이언트 초기화
         client = Client(this)
-            .setEndpoint("https://cloud.appwrite.io/v1")  // Appwrite 서버 주소
+            .setEndpoint("https://fra.cloud.appwrite.io/v1")  // Appwrite 서버 주소
             .setProject("moontree-test")  // Appwrite 프로젝트 ID
 
         account = Account(client)

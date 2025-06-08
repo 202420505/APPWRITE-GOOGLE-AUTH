@@ -1,4 +1,4 @@
-package me.moontree.test.appwrite.auth.app1
+package me.moontree.test.appwrite.auth.app2
 
 import android.os.Bundle
 import android.util.Log
